@@ -1,0 +1,1 @@
+import{j as t}from"./jsx-runtime.CIMolHGP.js";import{u as s}from"./index.bM7OrN6I.js";import{$ as a}from"./store.aycOQVLs.js";import{r as i}from"./index.DddtCxX5.js";const u=e=>{const r=s(a);return i.useEffect(()=>{a.setKey(e.playerId,{...r[e.playerId],isEmbed:e.isEmbed,avFileUuid:e.initialFile})},[e.playerId,e.isEmbed]),t.jsx(t.Fragment,{})};export{u as default};
