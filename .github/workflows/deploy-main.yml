@@ -10,7 +10,7 @@ on:
 
 # Allow this job to clone the repo and create a page deployment
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: deploy-to-main-group
-      cancel-in-progress: true    
+      cancel-in-progress: true
     steps:
       - name: Checkout project repository
         uses: actions/checkout@v4
@@ -53,7 +53,7 @@ jobs:
         with:
           repository: AVAnnotate/universal-client
           path: "./client"
-          ref: ${{vars.PROJECT_CLIENT_BRANCH || 'main'}}            
+          ref: ${{vars.PROJECT_CLIENT_BRANCH || 'main'}}
 
       - name: npm install
         working-directory: "./client"
@@ -76,7 +76,7 @@ jobs:
         run: mv ./client/src/content/project.json ./client/src/content/project/project.json
 
       - name: Copy any VTT files to public
-        run: cp -r ./data/vtt/. ./client/public/        
+        run: cp -r ./data/vtt/. ./client/public/
 
       # Only publish when directed
       - name: Setup Pages
@@ -93,10 +93,9 @@ jobs:
 
       - name: Build Astro Client
         uses: withastro/action@v2
-        if: ${{ env.project_publish_publish_pages_app == 'true' }}
         with:
-            path:  "./client"
-            
+          path: "./client"
+
       - name: Deploy to GitHub Pages
         if: ${{ env.project_publish_publish_pages_app == 'true' }}
         id: deployment
@@ -104,3 +103,16 @@ jobs:
         env:
           name: github-pages
           url: ${{ steps.deployment.outputs.page_url }}
+
+      - name: Create an offline site
+        if: ${{ env.project_publish_publish_pages_app != 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          rm -rf ./site
+          mv ./client/dist ./site
+          git config user.email "gitbot@avannotate.com"
+          git config user.name "GitHub Action Bot"
+          git add ./site
+          git commit -m 'Created offline site'
+          git push
