@@ -88,7 +88,6 @@ jobs:
         run: mkdir -p "./client/src/content/manifests"
 
       - name: Generate manifest
-        if: ${{ env.project_publish_publish_pages_app == 'true' }}
         run: npx tsx ./client/generate-iiif-3-manifests.ts -d './data' -u "https://${{ github.repository_owner }}.github.io/${{ env.project_project_slug}}" -s 'false'
 
       - name: Build Astro Client
