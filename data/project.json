@@ -1,21 +1,26 @@
 {
-  "users": [],
   "publish": {
-    "publishPagesApp": false,
-    "publishSHA": "",
-    "publishISODate": ""
+    "publish_pages_app": false,
+    "publish_sha": "",
+    "publish_iso_date": ""
   },
+  "users": [],
   "project": {
-    "title": "Zora Neale Hurston’s Works Progress Administration Recordings",
-    "description": "",
-    "language": "",
-    "slug": "",
+    "github_org": "AVAnnotate",
+    "title": "Test Private Repository",
+    "description": "Testing",
+    "language": "en",
+    "slug": "test-project-visibility",
+    "creator": "lwjameson",
     "authors": "",
-    "mediaPlayer": "universal",
-    "autoPopulateHomePage": "true",
-    "additionalUsers": [],
-    "": {},
-    "createdAt": "",
-    "updatedAt": ""
+    "media_player": "avannotate",
+    "auto_populate_home_page": true,
+    "additional_users": [],
+    "tags": {
+      "tagGroups": [],
+      "tags": []
+    },
+    "created_at": "2024-10-29T15:43:07.093Z",
+    "updated_at": "2024-10-29T15:43:07.093Z"
   }
 }
